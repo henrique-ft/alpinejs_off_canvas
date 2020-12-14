@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Decasa.io</title>
+    <style>
+.overlay {
+  min-height: 100%;
+  min-width: 100%;
+  display: none;
+  z-index: 399;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.44);
+  cursor: pointer;
+  -webkit-transition: all 600ms ease;
+  transition: all 600ms ease;
+}
+.overlay.on {
+  display: block;
+}
+
+.navbar {
+  position: fixed !important;
+  z-index: 2;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+.navbar .navbar-brand {
+  -webkit-box-pack: end;
+  justify-content: flex-end;
+  -webkit-box-flex: 1;
+  flex-grow: 1;
+  flex-shrink: 0;
+  background-color: #010101;
+}
+.navbar .navbar-burger {
+  margin-left: 0;
+  margin-right: auto;
+}
+@media (min-width: 1008px) {
+  .navbar {
+    left: 250px;
+  }
+}
+
+.right {
+  -webkit-box-pack: end;
+  justify-content: flex-end;
+}
+
+.sidebar {
+  top: 0;
+  left: -250px;
+  position: fixed;
+  width: 250px;
+  height: 100%;
+  background-color: whitesmoke;
+  overflow-y: auto;
+  -webkit-transition: all 600ms ease;
+  transition: all 600ms ease;
+  z-index: 400;
+  box-shadow: 0 2px 3px rgba(10, 10, 10, 0.1), 0 0 0 1px rgba(10, 10, 10, 0.1);
+}
+.sidebar .menu {
+  margin: 0.5em;
+  position: relative;
+}
+.sidebar.on {
+  margin-left: 250px;
+}
+@media (min-width: 1008px) {
+  .sidebar {
+    left: 0;
+  }
+  .sidebar.on {
+    margin-left: 0;
+  }
+}
+@media (min-width: 1008px) {
+  .content {
+    margin-left: 250px;
+  }
+}
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/2.3.0/alpine.js" integrity="sha512-nIwdJlD5/vHj23CbO2iHCXtsqzdTTx3e3uAmpTm4x2Y8xCIFyWu4cSIV8GaGe2UNVq86/1h9EgUZy7tn243qdA==" crossorigin="anonymous"></script></script>
+  </head>
+  <body>
+    <section x-data="offCanvas()">
+      <nav>
+        <div>
+          <button @click="toggle" :class="{ 'is-active': offCanvas }">
+		TOGGLE OFF CANVAS
+          </button>
+        </div>
+      </nav>
+
+      <div>
+        <aside class="sidebar" :class="{ on: offCanvas }">
+		SIDEBAR CONTENT
+        </aside>
+        <div @click="toggle" class="overlay" :class="{ 'on': offCanvas }"></div>
+      </div>
+
+      <div class="content">
+        <main style="--bg:white;--p:2.618033988750235%;--m:2.618033988750235%;">
+          <h1 style="--text-3d:var(--primary); --c:#FFF;">Decasa.io</h1>
+          MAIN CONTENT
+        </main>
+      </div>
+    </section>
+
+    <script>
+      function offCanvas(){
+        return {
+          offCanvas: false,
+          toggle() {
+            console.log(this.offCanvas)
+            this.offCanvas = !this.offCanvas;
+          }
+        }
+      }
+    </script>
+  </body>
+</html>
